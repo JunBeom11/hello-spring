@@ -1,4 +1,3 @@
-git 커밋 테스트
 `spring config`
 - spring version = 3.2.3 
 - java version = 17
