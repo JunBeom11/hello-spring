@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "age": 28,
+      "active": true,
+      "roles": [
+        "admin",
+        "editor"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "age": 34,
+      "active": false,
+      "roles": [
+        "editor"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Emily Johnson",
+      "email": "emily.johnson@example.com",
+      "age": 22,
+      "active": true,
+      "roles": [
+        "viewer"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Michael Brown",
+      "email": "michael.brown@example.com",
+      "age": 45,
+      "active": true,
+      "roles": [
+        "admin"
+      ]
+    }
+  ]
+}
