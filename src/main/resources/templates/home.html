@@ -1,10 +1,74 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            setBotSelectBox();
+        });
+
+        async function setBotSelectBox() {
+            try {
+                const response = await fetch('/bot/list/load');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                const select = document.getElementById('bot-select');
+                select.innerHTML = "<option value=''>Select a bot</option>"; // Clear existing options
+
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.name;
+                    option.textContent = `${item.name} - ${item.version}`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // setBotSelectBox2();
+        });
+
+        const setBotSelectBox2 = () => {
+            fetch('/bot/list/load')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const select = document.getElementById('bot-select');
+                    select.innerHTML = "<option value=''>Select a bot</option>"; // Clear existing options
+
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.name;
+                        option.textContent = `${item.name} - ${item.version}`;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+    </script>
+</head>
 <body>
 
     <div class="container">
         <div>
             <h1>Hello Srping</h1>
+
+            <select id="bot-select">
+                <option value="">Select a bot</option>
+            </select>
+
             <p>회원 기능</p>
             <p>
                 <a href="/members/new">회원 가입</a>

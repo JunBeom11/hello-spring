@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Selection</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<select id="bot-select">
+    <option value="">Select a bot</option>
+    <!-- Options will be populated by JavaScript -->
+</select>
+
+<table id="bot-table">
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Table rows will be populated by JavaScript -->
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        await setBotSelectBox();
+    });
+
+    async function setBotSelectBox() {
+        try {
+            const response = await fetch('/test-tool/bot/load');
+            const data = await response.json();
+
+            const select = document.getElementById('bot-select');
+            select.innerHTML = "<option value=''>Select a bot</option>";
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.name;
+                option.textContent = `${item.name} - ${item.version}`;
+                select.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    document.getElementById('bot-select').addEventListener('change', async function() {
+        const selectedBot = this.value;
+        if (selectedBot) {
+            await updateTable(selectedBot);
+        } else {
+            document.querySelector('#bot-table tbody').innerHTML = ''; // Clear table if no bot is selected
+        }
+    });
+
+    async function updateTable(botName) {
+        try {
+            const response = await fetch('/test-tool/bot/load');
+            const data = await response.json();
+
+            const tableBody = document.querySelector('#bot-table tbody');
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                if (item.name === botName) {
+                    item.detailMap.userList.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                                <td>${user.userId}</td>
+                                <td>${user.userName}</td>
+                                <td>${user.age}</td>
+                            `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,36 +1,83 @@
-{
-  "data": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "age": 28,
-      "active": true,
-      "roles": ["admin", "editor"]
-    },
-    {
-      "id": 2,
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "age": 34,
-      "active": false,
-      "roles": ["editor"]
-    },
-    {
-      "id": 3,
-      "name": "Emily Johnson",
-      "email": "emily.johnson@example.com",
-      "age": 22,
-      "active": true,
-      "roles": ["viewer"]
-    },
-    {
-      "id": 4,
-      "name": "Michael Brown",
-      "email": "michael.brown@example.com",
-      "age": 45,
-      "active": true,
-      "roles": ["admin"]
+[
+  {
+    "name": "Bot1",
+    "version": "1.0",
+    "createAt": "2024-07-23T12:00:00",
+    "count": 10,
+    "detailMap": {
+      "detailId": 1,
+      "detailName": "botDetailName1",
+      "userList": [
+        {
+          "userId": 101,
+          "userName": "Alice",
+          "age": 30
+        },
+        {
+          "userId": 102,
+          "userName": "Bob",
+          "age": 25
+        },
+        {
+          "userId": 103,
+          "userName": "Charlie",
+          "age": 35
+        }
+      ]
     }
-  ]
-}
+  },
+  {
+    "name": "Bot2",
+    "version": "2.0",
+    "createAt": "2024-07-23T13:00:00",
+    "count": 20,
+    "detailMap": {
+      "detailId": 2,
+      "detailName": "botDetailName2",
+      "userList": [
+        {
+          "userId": 201,
+          "userName": "David",
+          "age": 28
+        },
+        {
+          "userId": 202,
+          "userName": "Eve",
+          "age": 22
+        },
+        {
+          "userId": 203,
+          "userName": "Frank",
+          "age": 31
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bot3",
+    "version": "3.0",
+    "createAt": "2024-07-23T14:00:00",
+    "count": 30,
+    "detailMap": {
+      "detailId": 3,
+      "detailName": "botDetailName3",
+      "userList": [
+        {
+          "userId": 301,
+          "userName": "Grace",
+          "age": 29
+        },
+        {
+          "userId": 302,
+          "userName": "Hank",
+          "age": 32
+        },
+        {
+          "userId": 303,
+          "userName": "Ivy",
+          "age": 26
+        }
+      ]
+    }
+  }
+]

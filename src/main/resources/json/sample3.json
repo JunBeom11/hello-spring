@@ -1,45 +1,20 @@
-{
-  "data": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "age": 28,
-      "active": true,
-      "roles": [
-        "admin",
-        "editor"
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "age": 34,
-      "active": false,
-      "roles": [
-        "editor"
-      ]
-    },
-    {
-      "id": 3,
-      "name": "Emily Johnson",
-      "email": "emily.johnson@example.com",
-      "age": 22,
-      "active": true,
-      "roles": [
-        "viewer"
-      ]
-    },
-    {
-      "id": 4,
-      "name": "Michael Brown",
-      "email": "michael.brown@example.com",
-      "age": 45,
-      "active": true,
-      "roles": [
-        "admin"
-      ]
-    }
-  ]
-}
+[
+  {
+    "name": "Bot4",
+    "version": "1.0",
+    "createAt": "20240723095320",
+    "count": 10
+  },
+  {
+    "name": "Bot5",
+    "version": "2.0",
+    "createAt": "20240723095320",
+    "count": 20
+  },
+  {
+    "name": "Bot6",
+    "version": "3.0",
+    "createAt": "20240723095320",
+    "count": 30
+  }
+]
