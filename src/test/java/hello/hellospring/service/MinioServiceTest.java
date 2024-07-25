@@ -131,4 +131,46 @@ class MinioServiceTest {
         }
     }
 
+    @Test
+    public void loadBucketFile() {
+        try {
+            // Minio에서 오브젝트 조회
+            InputStream stream = minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .build());
+
+            // 오브젝트 내용을 문자열로 변환
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+
+            for (int bytesRead = stream.read(buffer); bytesRead != -1; bytesRead = stream.read(buffer)) {
+                baos.write(buffer, 0, bytesRead);
+            }
+
+            String jsonContent = baos.toString(StandardCharsets.UTF_8);
+
+            // 스트림 닫기
+            stream.close();;
+
+            // 가져온 내용을 출력
+            System.out.println("Retrieved JSON content: " + jsonContent);
+
+            // JSON 데이터가 비어 있는지 확인
+            if (jsonContent.isEmpty()) {
+                System.err.println("Error: Retrieved JSON content is empty.");
+            }
+
+            // JSON 데이터를 List<List<UserDTO>>로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<List<UserDto>> userList = objectMapper.readValue(jsonContent, new TypeReference<List<List<UserDto>>>() {});
+
+            // 스트림 닫기
+            stream.close();
+        } catch (Exception e) {
+            System.err.println("Error occurred: " + e);
+        }
+    }
+
 }
