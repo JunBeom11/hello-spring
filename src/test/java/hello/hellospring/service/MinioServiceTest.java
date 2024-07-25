@@ -97,4 +97,38 @@ class MinioServiceTest {
         return userList;
     }
 
+    @Test
+    public void deleteBucket() {
+        try {
+            // 버킷 내 모든 객체 삭제
+            Iterable<Result<Item>> results = minioClient.listObjects(
+                    ListObjectsArgs.builder().bucket(bucketName).build());
+
+            for (Result<Item> result : results) {
+                Item item = result.get();
+                minioClient.removeObject(
+                        RemoveObjectArgs.builder().bucket(bucketName).object(item.objectName()).build());
+            }
+
+            // 버킷 삭제
+            minioClient.removeBucket(RemoveBucketArgs.builder().bucket(bucketName).build());
+            System.out.println("Bucket " + bucketName + " successfully deleted.");
+        } catch (Exception e) {
+            System.err.println("Error occurred: " + e);
+        }
+    }
+
+    // 버킷 내 특정 파일 삭제 메서드
+    @Test
+    public void deleteFile(String bucketName, String objectName) {
+        try {
+            minioClient.removeObject(RemoveObjectArgs.builder().bucket(bucketName).object(objectName).build());
+            System.out.println("File " + objectName + " in bucket " + bucketName + " successfully deleted.");
+        } catch (MinioException e) {
+            System.err.println("Error occurred: " + e);
+        } catch (Exception e) {
+            System.err.println("Error occurred: " + e);
+        }
+    }
+
 }
