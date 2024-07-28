@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple DataTable</title>
+    <!-- Simple-DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
+</head>
+<body>
+<h1>User Table</h1>
+<table id="userTable" class="display">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}">1</td>
+        <td th:text="${user.userName}">Alice</td>
+        <td th:text="${user.age}">20</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Simple-DataTables JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+<script>
+    // 데이터 테이블 초기화
+    const dataTable = new simpleDatatables.DataTable("#userTable", {
+        searchable: false,
+        sortable: true,
+        paging: true,
+        perPage: 5,
+        perPageSelect: [5, 10, 15, 20],
+        columns: [
+            { select: 0, sortable: true, searchable: true },
+            { select: 1, sortable: true, searchable: true },
+            { select: 2, sortable: true, searchable: true }
+        ]
+    });
+
+    // 새로운 행 추가 예제
+    dataTable.addRow([4, "David", "david@example.com"]);
+</script>
+</body>
+</html>
