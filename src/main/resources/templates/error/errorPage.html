@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Validation Errors</h1>
+<ul>
+    <li th:each="error : ${errors}" class="error" th:text="${error.defaultMessage}"></li>
+</ul>
+<a href="/">Back to Main Page</a>
+</body>
+</html>

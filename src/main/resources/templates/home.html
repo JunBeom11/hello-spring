@@ -57,6 +57,60 @@
                     console.error('Error fetching data:', error);
                 });
         }
+
+        const openPopupWithFormData = (users) => {
+            // 폼 생성
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = '/popup';
+            form.target = 'popupWindow';
+
+            // 사용자 데이터를 hidden input으로 추가
+            users.forEach((user, index) => {
+                var userIdInput = document.createElement('input');
+                userIdInput.type = 'hidden';
+                userIdInput.name = 'users[' + index + '].userId';
+                userIdInput.value = user.userId;
+                form.appendChild(userIdInput);
+
+                var userNameInput = document.createElement('input');
+                userNameInput.type = 'hidden';
+                userNameInput.name = 'users[' + index + '].userName';
+                userNameInput.value = user.userName;
+                form.appendChild(userNameInput);
+
+                var userAgeInput = document.createElement('input');
+                userAgeInput.type = 'hidden';
+                userAgeInput.name = 'users[' + index + '].age';
+                userAgeInput.value = user.age;
+                form.appendChild(userAgeInput);
+            });
+
+            // 폼을 body에 추가
+            document.body.appendChild(form);
+
+            // 팝업 창 열기
+            window.open('', 'popupWindow', 'width=600,height=400');
+
+            // 폼 제출
+            form.submit();
+
+            // 폼 제거
+            document.body.removeChild(form);
+        }
+
+        function openPopup() {
+            // 예시 사용자 데이터
+            var users = [
+                { userId: 1, userName: 'User One', age: 10 },
+                { userId: 2, userName: 'User Two', age: 20 },
+                { userId: 3, userName: 'User Three', age: 25 },
+                { userId: 4, userName: 'User Four', age: 40},
+                { userId: 5, userName: 'User Five', age:60 }
+            ];
+
+            openPopupWithFormData(users);
+        }
     </script>
 </head>
 <body>
@@ -74,6 +128,8 @@
                 <a href="/members/new">회원 가입</a>
                 <a href="/members">회원 목록</a>
             </p>
+
+            <button onclick="openPopup()">Open Popup</button>
         </div>
     </div>
 </body>
