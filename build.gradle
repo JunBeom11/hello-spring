@@ -23,9 +23,19 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'io.minio:minio:8.4.3'
 	implementation 'org.springframework.boot:spring-boot-devtools'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0' // Jackson Databind 의존성 추가
-	implementation 'org.springframework.boot:spring-boot-starter-validation' // valid
+
+	// Jackson Databind 의존성 추가
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.15.0'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.0'
+
+	// valid
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// db
 	runtimeOnly 'com.h2database:h2'
+
+	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// Lombok 의존성 추가
@@ -33,6 +43,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 	testCompileOnly 'org.projectlombok:lombok:1.18.24'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+	// redis 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.data:spring-data-redis'
 }
 
 tasks.named('test') {
