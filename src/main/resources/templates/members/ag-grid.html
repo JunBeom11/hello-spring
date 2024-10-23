@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ag-Grid Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/styles/ag-theme-alpine.css">
+</head>
+<body>
+<h1>ag-Grid 예제</h1>
+
+<input type="text" id="searchInput" placeholder="검색어 입력">
+<button id="searchBtn">검색 버튼 </button>
+
+<!-- 그리드를 배치할 div -->
+<div id="myGrid" class="ag-theme-alpine" style="height: 400px; width: 600px;"></div>
+
+<!-- ag-Grid 스크립트 -->
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // 컬럼 정의
+    const columnDefs = [
+      {
+        headerCheckboxSelection: true,  // 헤더에 전체 선택 체크박스 추가
+        checkboxSelection: true,  // 각 행에 체크박스 추가
+        width: 100
+      },
+      { headerName: "이름", field: "userName", sortable: true},
+      { headerName: "나이", field: "age", sortable: true},
+    ];
+
+    // 그리드 옵션 정의
+    const gridOptions = {
+      columnDefs: columnDefs,
+      rowData: null,
+      rowSelection: 'multiple',  // 다중 선택 가능
+      suppressRowClickSelection: true,
+      onGridReady: function (params) {
+        loadData('/api/v1/users');  // 처음 페이지 로드 시 기본 데이터를 불러옴
+      }
+    };
+
+    // 그리드를 표시할 div
+    const eGridDiv = document.querySelector('#myGrid');
+
+    // 그리드를 초기화
+    new agGrid.Grid(eGridDiv, gridOptions);
+
+    document.getElementById('searchBtn').addEventListener('click', function() {
+      if (gridOptions.api) { // api가 정의되어 있는지 확인
+        const searchTerm = document.getElementById('searchInput').value;
+
+        // 서버로부터 검색된 데이터 다시 로드
+        loadData('/api/v1/users?name=' + searchTerm);
+      } else {
+        console.error("Grid API is not initialized yet.");
+      }
+    })
+
+    function loadData(url) {
+      console.log(url);
+      $.ajax({
+        url: url,
+        method: "GET",
+        success: function(data) {
+          if (gridOptions.api) {
+            gridOptions.api.setGridOption("rowData", data);
+          } else {
+            console.error("Grid API is not initialized yet.");
+          }
+        },
+        error: function(error) {
+          console.error("Error fetching data", error);
+        }
+      });
+    }
+</script>
+</body>
+</html>

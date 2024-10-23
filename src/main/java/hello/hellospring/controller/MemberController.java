@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -42,6 +43,14 @@ public class MemberController {
         model.addAttribute("members", members);
 
         return "members/memberList";
+    }
+
+    @GetMapping("/members/ag-grid")
+    public String agGrid(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+
+        return "members/ag-grid";
     }
 
 }
